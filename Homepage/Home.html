@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이세영님의 홈페이지</title>
+    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        <div class="util">
+            <ul class="util-menu">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+            </ul>
+        </div>
+
+        <div class="menu">
+            <div class="menu-left">
+                <a href="#"><i class="fa fa-user"></i></a>
+            </div>
+            <div class="menu-center">
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Board</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="menu-right">
+                <a href="#"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="tab-box">
+            <!-- 탭 -->
+            <input type="radio" id="home" name="tab" checked>
+            <label for="home" class="tab-item">HOME</label>
+
+            <input type="radio" id="tab2" name="tab" checked>
+            <label for="tab2" class="tab-item">Tab 2</label>
+
+            <input type="radio" id="tab3" name="tab" checked>
+            <label for="tab3" class="tab-item">Tab 3</label>
+
+            <input type="radio" id="tab3" name="tab" checked>
+            <label for="tab3" class="tab-item">Tab 3</label>
+
+            <!-- 탭 내용 -->
+            <!-- (.tab-content#tab$-content>img[src="img/$.jpg"])*3 -->
+            <div class="tab-content" id="tab1-content">
+                <img src="img/1.jpg" alt="" width="300">
+            </div>
+            <div class="tab-content" id="tab2-content">
+                <img src="img/2.jpg" alt="" width="300">
+            </div>
+            <div class="tab-content" id="tab3-content">
+                <img src="img/3.jpg" alt="" width="300">
+            </div>
+            <div class="tab-content" id="tab3-content">
+                <img src="img/3.jpg" alt="" width="300">
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
