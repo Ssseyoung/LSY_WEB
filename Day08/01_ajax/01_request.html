@@ -100,7 +100,7 @@
 
     <h3>게시글 목록</h3>
     <table border="1" id="board-list">
-        <tr>
+        <tr id="board-title">
             <th width="50">번호</th>
             <th width="300">제목</th>
             <th width="100">작성자</th>
@@ -134,20 +134,27 @@
                 // requeset.status      : 응답 상태 코드
                 // ex) 200, 404, 500
                 // 요청 완료 시, 성공적으로 처리되었을 때
+                let response = ''
                 if( request.readyState == request.DONE && request.status == 200 ) {
                     // request.responseText : 응답 데이터
-                    let response = request.responseText
-                    // JSON.parse() : text --> JSON 변환
-                    let board = JSON.parse(response)
-                    // alert(board)
-                    // 데이터 화면에 출력하기
-                    let title = document.getElementById('title')
-                    let writer = document.getElementById('writer')
-                    let content = document.getElementById('content')
+                    response = request.responseText
 
-                    title.innerText = board.title
-                    writer.innerText = board.writer
-                    content.value = board.content
+                    if( response == '' ) {
+                        alert('데이터가 없습니다.')
+                    }
+                    else {
+                        // JSON.parse() : text --> JSON 변환
+                        let board = JSON.parse(response)
+                        // alert(board)
+                        // 데이터 화면에 출력하기
+                        let title = document.getElementById('title')
+                        let writer = document.getElementById('writer')
+                        let content = document.getElementById('content')
+    
+                        title.innerText = board.title
+                        writer.innerText = board.writer
+                        content.value = board.content
+                    }
                 }
             }
 
@@ -176,6 +183,7 @@
 
                 if( request.readyState == request.DONE && request.status == 200 ) {
                     let response = request.responseText
+
                     // JSON.parse() : text --> JSON 변환
                     let boardList = JSON.parse(response)
 
@@ -186,10 +194,14 @@
                      
                     // 데이터가 있으면
                     else {
-                        document.getElementById('empty').remove()
+                        // 데이터 비우기
+                        let boardTitle = document.getElementById('board-title')
+                        document.getElementById('board-list').innerHTML = ''
+                        document.getElementById('board-list').appendChild(boardTitle)
                     }
+
                     
-                    // 게시굴 목록 추가
+                    // 게시글 목록 추가
                     let $boardList = document.getElementById('board-list')
                     for (const board of boardList) {
                         // console.log(board.title)
@@ -238,6 +250,7 @@
                 if( request.readyState == request.DONE && request.status == 200 ) {
                     let response = request.responseText
                     alert(response)
+                    getList()
                 }
 
                 // 에러 발생
@@ -274,7 +287,7 @@
             let data = `<Board>
                        <title>${title}</title>
                        <writer>${writer}</writer>
-                       <content>${title}</content>
+                       <content>${content}</content>
                        </Board>`
                        
 
@@ -287,6 +300,7 @@
                 if( request.readyState == request.DONE && request.status == 200 ) {
                     let response = request.responseText
                     alert(response)
+                    getList()
                 }
 
                 // 에러 발생
@@ -329,6 +343,7 @@
                 if( request.readyState == request.DONE && request.status == 200 ) {
                     let response = request.responseText
                     alert(response)
+                    getList()
                 }
 
                 // 에러 발생
@@ -346,6 +361,110 @@
             // JSON.stringify() : JavaScript 의 객체를 JSON 문자열로 변환하는 메소드
             request.send( JSON.stringify(data) )
 
+        }
+
+
+        // 게시글 수정 요청 - XML
+        function updateXML() {
+            
+            let boardNo = document.getElementById('update-boardNo').value
+            let title = document.getElementById('update-title').value
+            let writer = document.getElementById('update-writer').value
+            let content = document.getElementById('update-content').value
+
+            let data = `<Board>
+                            <boardNo>${boardNo}</boardNo>
+                            <title>${title}</title>
+                            <writer>${writer}</writer>
+                            <content>${content}</content>
+                        </Board>`
+
+            let request = new XMLHttpRequest()
+
+            // 응답 확인
+            request.onreadystatechange = function() {
+
+                // 요청 성공
+                if( request.readyState == request.DONE && request.status == 200 ) {
+                    let response = request.responseText
+                    alert(response)
+                    getList()
+                }
+
+                // 에러 발생
+                if( request.readyState == request.DONE && request.status == 500 ) {
+                    alert('에러 발생')
+                }
+
+            }
+
+            let url = "http://192.168.0.44:8080/api/board"
+
+            request.open("PUT", url, true)
+            request.setRequestHeader("Content-Type", "application/xml")
+            request.send( data )
+
+        }
+
+        // 게시글 삭제 요청 - JSON
+        function deleteJSON() {
+
+            let request = new XMLHttpRequest()
+            let boardNo = document.getElementById('delete-boardNo').value
+            let data = {
+                            'boardNo' : boardNo
+                       }
+            
+            // 응답 확인
+            request.onreadystatechange = function() {
+                // 요청 성공
+                if( request.readyState == request.DONE && request.status == 200 ) {
+                    let response = request.responseText
+                    alert(response)
+                    getList()
+                }
+                // 에러 발생
+                if( request.readyState == request.DONE && request.status == 500 ) {
+                    alert('에러 발생')
+                }
+            }
+
+            let url = "http://192.168.0.44:8080/api/board"
+
+            request.open("DELETE", url, true)
+            request.setRequestHeader("Content-Type", "application/json")
+            request.send( JSON.stringify(data) )
+        }
+
+
+        // 게시글 삭제 요청 - XML
+        function deleteXML() {
+
+            let request = new XMLHttpRequest()
+            let boardNo = document.getElementById('delete-boardNo').value
+            let data = `<Board>
+                            <boardNo>${boardNo}</boardNo>
+                        </Board>`
+
+            // 응답 확인
+            request.onreadystatechange = function() {
+                // 요청 성공
+                if( request.readyState == request.DONE && request.status == 200 ) {
+                    let response = request.responseText
+                    alert(response)
+                    getList()
+                }
+                // 에러 발생
+                if( request.readyState == request.DONE && request.status == 500 ) {
+                    alert('에러 발생')
+                }
+            }
+
+            let url = "http://192.168.0.44:8080/api/board"
+
+            request.open("DELETE", url, true)
+            request.setRequestHeader("Content-Type", "application/xml")
+            request.send( data )
         }
 
     </script>
