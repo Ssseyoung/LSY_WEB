@@ -13,6 +13,18 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
+    <!-- 사이드바 -->
+    <aside id="sidebar">
+        <div class="top flex main-end">
+            <a href="javascript:;">X</a>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="board/list.html">Board</a></li>
+            <li><a href="gallery/list.html">Gallery</a></li>
+        </ul>
+    </aside>
+
     <header>
         <!-- 로그인 | 회원가입 -->
         <div class="util"></div>
@@ -30,7 +42,7 @@
                         <a href="index.html"><span class="material-symbols-outlined">home</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="material-symbols-outlined">menu</span></a>
+                        <a href="javascript:;" id="btn-menu"><span class="material-symbols-outlined">menu</span></a>
                     </li>
                 </ul>
             </nav>
@@ -51,5 +63,15 @@
 
         </div>
     </section>
+
+    <!-- jQuery -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <script>
+        $('#btn-menu').on('click', function() {
+            $('#sidebar').addClass('on')
+        })
+    </script>
 </body>
 </html>

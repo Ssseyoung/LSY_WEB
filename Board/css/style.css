@@ -111,6 +111,20 @@ header .menu nav ul li:hover::before  {
    
 }
 
+/* 사이드바 */
+#sidebar {
+   width: 70vw;
+   height: 100vh;
+   background-color: darkseagreen;
+   border: 1px solid royalblue;
+   position: fixed;
+   right: -70vw;
+   transition: all 0.4s;
+}
+
+#sidebar.on {
+   right: 0;
+}
 
  /* 메인 */
  .container {
