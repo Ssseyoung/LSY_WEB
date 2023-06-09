@@ -30,7 +30,7 @@ VALUES ( SEQ_BOARD.nextval, '제목04', '작성자04', '내용04');
 INSERT INTO board( board_no, title, writer, content )
 VALUES ( SEQ_BOARD.nextval, '제목05', '작성자05', '내용05');
 
--- 8번
+-- 4번
 INSERT INTO board( board_no, title, writer, content )
 SELECT SEQ_BOARD.nextval, title, writer, content
 FROM board;
