@@ -353,6 +353,19 @@
 
         })
 
+        document.addEventListener('keydown', function(event) {
+            var key = event.key || event.keyCode;
+
+        // Check if the pressed key is the backspace key
+        if (key === 'Backspace' || key === 8) {
+        // Perform the back navigation
+        window.history.back();
+
+        // Prevent the default backspace behavior (e.g., going back in input fields)
+        event.preventDefault();
+            }
+        });
+
 
     </script>
 </body>
